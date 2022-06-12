@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 
 type SquareProps = {
-  value: number;
+  value: string;
 }
 
 type SquareState = {
@@ -26,9 +26,23 @@ class Square extends React.Component<SquareProps, SquareState> {
   }
 }
 
-class Board extends React.Component {
+type BoardProps = {
+}
+
+type BoardState = {
+  squares: string[];
+}
+
+class Board extends React.Component<BoardProps, BoardState> {
+  constructor(props: BoardProps) {
+    super(props);
+    this.state = {
+      squares: Array(9).fill(null),
+    };
+  }
+
   renderSquare(i: number) {
-    return <Square value={i} />;
+    return <Square value={this.state.squares[i]} />;
   }
 
   render() {
