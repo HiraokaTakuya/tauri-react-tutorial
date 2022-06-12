@@ -4,6 +4,7 @@ import './App.css';
 
 type SquareProps = {
   value: string;
+  onClick: () => void;
 }
 
 type SquareState = {
@@ -19,8 +20,8 @@ class Square extends React.Component<SquareProps, SquareState> {
   }
   render() {
     return (
-      <button className="square" onClick={() => { this.setState({value: 'X'}); }}>
-        {this.state.value}
+      <button className="square" onClick={() => { this.props.onClick(); }}>
+        {this.props.value}
       </button>
     );
   }
@@ -31,6 +32,7 @@ type BoardProps = {
 
 type BoardState = {
   squares: string[];
+  xIsNext: boolean,
 }
 
 class Board extends React.Component<BoardProps, BoardState> {
@@ -38,15 +40,30 @@ class Board extends React.Component<BoardProps, BoardState> {
     super(props);
     this.state = {
       squares: Array(9).fill(null),
+      xIsNext: true,
     };
   }
 
+  handleClick(i: number) {
+    const squares = this.state.squares.slice();
+    squares[i] = this.state.xIsNext ? 'X' : 'O';
+    this.setState({
+      squares: squares,
+      xIsNext: !this.state.xIsNext,
+    });
+  }
+
   renderSquare(i: number) {
-    return <Square value={this.state.squares[i]} />;
+    return (
+      <Square
+        value={this.state.squares[i]}
+        onClick={() => this.handleClick(i)}
+      />
+    );
   }
 
   render() {
-    const status = 'Next player: X';
+    const status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
 
     return (
       <div>
