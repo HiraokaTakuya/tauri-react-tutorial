@@ -1,3 +1,11 @@
+# Tauri-React-Tutorial
+
+The result of proceeding through the React tutorial. See below.
+
+[https://reactjs.org/tutorial/tutorial.html](https://reactjs.org/tutorial/tutorial.html)
+
+I used Tauri and TypeScript.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
